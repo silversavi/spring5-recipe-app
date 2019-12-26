@@ -3,21 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Recipe home</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
 </head>
 <body>
-    <h1>My recipes!</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Description</th>
-        </tr>
 
-        <tr th:each="recipe: ${recipes}"}>
-            <td th:text="${recipe.id}">123</td>
-            <td th:text="${recipe.description}">Tasty food</td>
-        </tr>
-    </table>
-
+<div class="cointainer-fluid" style="margin-top: 20px">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card card-primary">
+                <div class="card-heading">
+                    <h1 class="card-title">My recipes!</h1>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="thead-inverse">
+                            <tr>
+                                    <th>ID</th>
+                                    <th>Description</th>
+                            </tr>
+                            </thead>
+                            <tr th:remove="all"}>
+                                <td th:text="${recipe.id}">123</td>
+                                <td th:text="${recipe.description}">Tasty food 1</td>
+                            </tr>
+                            <tr th:remove="all"}>
+                                <td th:text="${recipe.id}">123</td>
+                                <td th:text="${recipe.description}">Tasty food 2</td>
+                            </tr>
+                            <tr th:each="recipe: ${recipes}"}>
+                                <td th:text="${recipe.id}">123</td>
+                                <td th:text="${recipe.description}">Tasty food 3</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>
