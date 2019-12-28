@@ -35,21 +35,26 @@
                         <table class="table table-hover">
                             <thead class="thead-inverse">
                             <tr>
-                                    <th>ID</th>
-                                    <th>Description</th>
+                                <th>ID</th>
+                                <th>Description</th>
+                                <th>View</th>
                             </tr>
                             </thead>
                             <tr th:remove="all">
-                                <td th:text="${recipe.id}">123</td>
-                                <td th:text="${recipe.description}">Tasty food 1</td>
+                                <td>123</td>
+                                <td>Tasty food 1</td>
+                                <td><a href="#">View</a></td>
                             </tr>
                             <tr th:remove="all">
-                                <td th:text="${recipe.id}">123</td>
-                                <td th:text="${recipe.description}">Tasty food 2</td>
+                                <td>121323</td>
+                                <td>Tasty food 2</td>
+                                <td><a href="#">View</a></td>
                             </tr>
                             <tr th:each="recipe: ${recipes}">
-                                <td th:text="${recipe.id}">123</td>
+                                <td th:text="${recipe.id}">1213123123</td>
                                 <td th:text="${recipe.description}">Tasty food 3</td>
+                                <td><a href="#" th:href="@{'/recipe/show/' + ${recipe.id}}"
+                                    th:text="${recipe.id}">View</a></td>
                             </tr>
                         </table>
                     </div>
