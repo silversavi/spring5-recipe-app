@@ -4,7 +4,6 @@ import ee.slvr.springrecipes.commands.IngredientCommand;
 import ee.slvr.springrecipes.commands.UnitOfMeasureCommand;
 import ee.slvr.springrecipes.domain.Ingredient;
 import ee.slvr.springrecipes.domain.Recipe;
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -46,7 +45,7 @@ public class IngredientCommandToIngredientTest {
         command.setDescription(DESCRIPTION);
         UnitOfMeasureCommand unitOfMeasureCommand = new UnitOfMeasureCommand();
         unitOfMeasureCommand.setId(UOM_ID);
-        command.setUnitOfMeasure(unitOfMeasureCommand);
+        command.setUom(unitOfMeasureCommand);
 
         //when
         Ingredient ingredient = converter.convert(command);
