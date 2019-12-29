@@ -5,7 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 
-@Data
+@Data //might cause problems -> change to @Getter and @Setter
 @Entity
 public class UnitOfMeasure {
 
