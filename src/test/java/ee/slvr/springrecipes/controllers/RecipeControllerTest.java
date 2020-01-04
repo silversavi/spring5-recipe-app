@@ -2,6 +2,7 @@ package ee.slvr.springrecipes.controllers;
 
 import ee.slvr.springrecipes.commands.RecipeCommand;
 import ee.slvr.springrecipes.domain.Recipe;
+import ee.slvr.springrecipes.exceptions.NotFoundException;
 import ee.slvr.springrecipes.service.RecipeService;
 import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.BeforeEach;
@@ -53,6 +54,19 @@ public class RecipeControllerTest {
                 .andExpect(view().name("recipe/show"))
                 .andExpect(model().attributeExists("recipe"));
     }
+
+    @Test
+    public void testGetRecipeNotFound() throws Exception {
+
+        when(recipeService.findById(anyLong())).thenThrow(NotFoundException.class);
+
+        mockMvc.perform(get("/recipe/4/show"))
+                .andExpect(status().isNotFound())
+                .andExpect(view().name("404error"));
+    }
+
+
+
     @Test
     public void testGetNewRecipeForm() throws Exception {
         RecipeCommand command = new RecipeCommand();
