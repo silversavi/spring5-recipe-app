@@ -3,6 +3,7 @@ package ee.slvr.springrecipes.controllers;
 import ee.slvr.springrecipes.commands.RecipeCommand;
 import ee.slvr.springrecipes.service.ImageService;
 import ee.slvr.springrecipes.service.RecipeService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +18,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+@Slf4j
 @Controller
 public class ImageController {
     private final ImageService imageService;
