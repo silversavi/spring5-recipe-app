@@ -2,6 +2,7 @@ package ee.slvr.springrecipes.controllers;
 
 import ee.slvr.springrecipes.commands.RecipeCommand;
 import ee.slvr.springrecipes.exceptions.NotFoundException;
+import ee.slvr.springrecipes.exceptions.NumberFormatException;
 import ee.slvr.springrecipes.service.RecipeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,12 @@ public class RecipeController {
 
     @GetMapping("/recipe/{id}/show")
     public String showById(@PathVariable String id, Model model){
-        model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
+        try {
+            model.addAttribute("recipe", recipeService.findById(Long.valueOf(id)));
+        } catch (java.lang.NumberFormatException e) {
+            throw new NumberFormatException("Recipe Not Found for ID value: " + id.toString() );
+        }
+
 
         return "recipe/show";
     }
@@ -55,15 +61,31 @@ public class RecipeController {
         return "redirect:/";
     }
 
+
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(NotFoundException.class)
-    public ModelAndView handleNotFound() {
+    public ModelAndView handleNotFound(Exception exception) {
         log.error("Handling not found exception");
-
+        log.error(exception.getMessage());
         ModelAndView modelAndView = new ModelAndView();
 
         modelAndView.setViewName("404error");
+        modelAndView.addObject("exception", exception);
 
         return modelAndView;
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(NumberFormatException.class)
+    public ModelAndView handleNumberFormatException(Exception exception) {
+        log.error("Handling number format exception");
+        log.error(exception.getMessage());
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("400error");
+        modelAndView.addObject("exception", exception);
+
+        return modelAndView;
+    }
+
 }
